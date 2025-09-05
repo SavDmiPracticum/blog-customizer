@@ -2,10 +2,10 @@ import { CSSProperties, useState } from 'react';
 import {
 	ArticleStateType,
 	defaultArticleState,
-} from './constants/articleProps';
-import styles from './styles/index.module.scss';
-import { ArticleParamsForm } from './components/article-params-form';
-import { Article } from './components/article';
+} from '../../constants/articleProps';
+import styles from './app.module.scss';
+import { ArticleParamsForm } from '../article-params-form';
+import { Article } from '../article';
 
 export const App = () => {
 	const [currentStyle, setCurrentStyle] =
