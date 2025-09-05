@@ -29,30 +29,30 @@ export const ArticleParamsForm = ({
 	style,
 	onChange,
 }: ArticleParamsFormProps) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [formState, setFormState] = useState<ArticleStateType>(style);
 	const asideRef = useRef<HTMLElement>(null);
 
 	useOutsideClickClose({
-		isOpen,
+		isOpen: isMenuOpen,
 		rootRef: asideRef,
-		onClose: () => setIsOpen(false),
+		onClose: () => setIsMenuOpen(false),
 	});
 
 	const handleClickArrow = () => {
-		setIsOpen((prev) => !prev);
+		setIsMenuOpen((prev) => !prev);
 	};
 
 	const handleReset = () => {
 		onChange(defaultArticleState);
 		setFormState(defaultArticleState);
-		setIsOpen(false);
+		setIsMenuOpen(false);
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		onChange(formState);
-		setIsOpen(false);
+		setIsMenuOpen(false);
 	};
 
 	const handleChange = <K extends keyof ArticleStateType>(
@@ -64,10 +64,12 @@ export const ArticleParamsForm = ({
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} onClick={handleClickArrow} />
+			<ArrowButton isOpen={isMenuOpen} onClick={handleClickArrow} />
 			<aside
 				ref={asideRef}
-				className={clsx(styles.container, { [styles.container_open]: isOpen })}>
+				className={clsx(styles.container, {
+					[styles.container_open]: isMenuOpen,
+				})}>
 				<form
 					className={styles.form}
 					onReset={handleReset}
